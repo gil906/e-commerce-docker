@@ -1,5 +1,5 @@
-# Use a lightweight Node.js image
-FROM node:14-alpine
+# Use a lightweight Node.js image with ARM64 architecture
+FROM node:14-bullseye-slim
 
 # Set the working directory
 WORKDIR /app
@@ -16,3 +16,5 @@ COPY . .
 # Expose port 8000
 EXPOSE 8000
 
+# Start the server
+CMD ["node", "app.js"]
