@@ -1,5 +1,5 @@
 
-Basics about this E-commerce Store deployment compatible witha Raspberry Pi:
+Basics about this E-commerce Store deployment compatible with a Raspberry Pi:
 Front-end: Create a responsive online store UI with frameworks like React or Angular.
 Back-end: Use Node.js or Python with a framework like Express or Django.
 Database: Store product information in a database like MySQL or PostgreSQL.
