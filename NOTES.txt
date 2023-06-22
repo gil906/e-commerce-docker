@@ -8,33 +8,42 @@ Application Layer: Develop a RESTful API for managing products, orders, and paym
 
 More details about it:
 
-Front-end:
-Develop a responsive online store user interface using a front-end framework like React or Angular.
-Design an intuitive and user-friendly layout for product listings, search functionality, and shopping cart management.
-Implement features such as product filtering, sorting, and pagination to enhance the browsing experience.
-Include a secure payment gateway integration to facilitate online transactions.
+Front-end Layer:
 
-Back-end:
-Use a server-side technology like Node.js or Python with a framework like Express or Django to handle business logic and API development.
-Implement user authentication and authorization to manage user accounts and secure access to sensitive information.
-Develop APIs for managing products, orders, user profiles, and payment processing.
-Include features like product inventory management, order tracking, and shipping integration.
+The front-end layer handles the user interface and is responsible for rendering the website's components and providing an interactive user experience.
+In the Dockerfile, we use a lightweight Node.js image suitable for ARM64 architecture as the base image.
+The Dockerfile sets the working directory, copies the package.json and package-lock.json files, installs dependencies, and copies the built React application.
+The Dockerfile exposes port 80 to allow external access to the front-end application.
+The CMD command starts the server using the "serve" package, serving the static files from the build directory.
+Building the Docker image creates an isolated container that contains the front-end code and its dependencies.
+Back-end Layer:
 
-Database:
-Store product information, including details like name, description, price, and availability, in a database such as MySQL, PostgreSQL, or MongoDB.
-Utilize the database to manage user information, such as account details, shipping addresses, and order history.
-Implement database schema and relationships to support product categorization, reviews, and ratings.
+The back-end layer handles the server-side logic and provides APIs for interacting with the database and serving data to the front-end.
+In the Dockerfile, we again use a lightweight Node.js image suitable for ARM64 architecture as the base image.
+The Dockerfile sets the working directory, copies the package.json and package-lock.json files, installs dependencies, and copies the back-end code.
+The Dockerfile exposes port 8000 to allow external access to the back-end server.
+The CMD command starts the server by running the app.js file (you may need to adjust the filename depending on your actual back-end setup).
+Building the Docker image creates an isolated container that contains the back-end code and its dependencies.
+Database Layer:
 
+The database layer manages the storage and retrieval of data required by the application.
+In the Dockerfile, we use the official MySQL image, which already supports ARM64 architecture.
+The Dockerfile sets environment variables for the root password and database name, and copies the database initialization script.
+The Dockerfile exposes port 3306 for external access to the MySQL database.
+Building the Docker image creates a container that runs the MySQL server with the specified configurations.
 Application Layer:
-Develop a RESTful API to handle requests and responses between the front-end and back-end components.
-Ensure proper validation and sanitization of user input to prevent security vulnerabilities like SQL injection and cross-site scripting (XSS).
-Implement mechanisms for handling cart management, including adding items, updating quantities, and removing products.
-Integrate with third-party payment gateways like Stripe or PayPal to securely process customer payments.
 
-Additional Considerations:
-Use responsive design principles to ensure the online store is accessible and user-friendly on various devices, including desktops, tablets, and smartphones.
-Implement security measures like encryption, secure HTTP (HTTPS), and input validation to protect user data and prevent unauthorized access.
-Consider implementing caching mechanisms to improve performance and reduce server load.
-Employ tools like Docker and Docker Compose to containerize each layer of the application, making it easier to deploy and manage on the Raspberry Pi 4.
+The application layer contains the main application logic and API endpoints, connecting the front-end and back-end layers.
+In the Dockerfile, we use a lightweight Node.js image suitable for ARM64 architecture as the base image.
+The Dockerfile sets the working directory, copies the package.json and package-lock.json files, installs dependencies, and copies the application code.
+The Dockerfile exposes port 8000 to allow external access to the application.
+The CMD command starts the server by running the app.js file (adjust as needed).
+Building the Docker image creates an isolated container that contains the application code and its dependencies.
+Docker Compose:
 
-
+The docker-compose.yml file defines the services for each layer and their configurations.
+The services section specifies the build context for each layer (e.g., frontend, backend, database, application).
+The ports section maps the container ports to the host machine ports, allowing external access to the services.
+The depends_on section defines the dependencies between services, ensuring that the required services start in the correct order.
+Running docker-compose up starts all the services defined in the docker-compose.yml file, creating separate containers for each service and establishing communication between them.
+By utilizing Docker and Docker Compose, you can easily deploy the e-commerce application by building and running the containers. Each layer runs independently within its container, providing isolation and modularity. The containers communicate with each other over the specified network, allowing seamless interaction between the front-end, back-end, database, and application layers.
