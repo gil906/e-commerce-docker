@@ -62,6 +62,59 @@ Follow these steps to set up and run the e-commerce application using Docker:
 
 Note: Make sure your Raspberry Pi is running Ubuntu Server with Docker installed.
 
+## Topology
++------------------+    +----------------+    +--------------+    +--------------+    +-------------+
+|    User's        |    |   Front-end    |    |   Back-end   |    |   Database   |    |    Redis    |
+|    Browser       |    |   Container    |    |   Container  |    |   Container  |    |  Container  |
++------------------+    +----------------+    +--------------+    +--------------+    +-------------+
+       |                        |                    |                   |                  |
+       | HTTP Requests          |                    |                   |                  |
+       |----------------------->|                    |                   |                  |
+       |                        |                    |                   |                  |
+       |       Views            |                    |                   |                  |
+       |<-----------------------|                    |                   |                  |
+       |                        |                    |                   |                  |
+       | API Requests           |                    |                   |                  |
+       |----------------------->|                    |                   |                  |
+       |                        |                    |                   |                  |
+       |                      Process                |                   |                  |
+       |                        |                    |                   |                  |
+       |                   Data Retrieval             |                   |                  |
+       |                        |                    |                   |                  |
+       |                        |    Database Query   |                   |                  |
+       |                        |<-------------------|                   |                  |
+       |                        |                    |                   |                  |
+       |                        |    Data Response    |                   |                  |
+       |                        |------------------->|                   |                  |
+       |                        |                    |                   |                  |
+       | API Responses          |                    |                   |                  |
+       |<-----------------------|                    |                   |                  |
+       |                        |                    |                   |                  |
+       |                        |                    |    Data Storage   |                  |
+       |                        |                    |------------------>|                  |
+       |                        |                    |                   |                  |
+       |                        |                    |                   |     Caching      |
+       |                        |                    |                   |<-----------------|
+       |                        |                    |                   |                  |
+       |                        |                    |                   |   Data Retrieval |
+       |                        |                    |                   |----------------->|
+       |                        |                    |                   |                  |
+       |    Front-end Updates   |                    |                   |                  |
+       |----------------------->|                    |                   |                  |
+       |                        |                    |                   |                  |
+       |      Rendered Views    |                    |                   |                  |
+       |<-----------------------|                    |                   |                  |
+       |                        |                    |                   |                  |
+       |                        |                    |                   |                  |
+       |    Displayed Views     |                    |                   |                  |
+       |                        |                    |                   |                  |
++------------------+
+|   User's        |
+|   Browser       |
++------------------+
+
+
+
 ## Customization
 
 - Update the Docker
