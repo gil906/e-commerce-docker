@@ -64,55 +64,68 @@ Note: Make sure your Raspberry Pi is running Ubuntu Server with Docker installed
 
 ## Topology
 
-+------------------+    +----------------+    +--------------+    +--------------+    +-------------+
-|    User's        |    |   Front-end    |    |   Back-end   |    |   Database   |    |    Redis    |
-|    Browser       |    |   Container    |    |   Container  |    |   Container  |    |  Container  |
-+------------------+    +----------------+    +--------------+    +--------------+    +-------------+
-       |                        |                    |                   |                  |
-       | HTTP Requests          |                    |                   |                  |
-       |----------------------->|                    |                   |                  |
-       |                        |                    |                   |                  |
-       |       Views            |                    |                   |                  |
-       |<-----------------------|                    |                   |                  |
-       |                        |                    |                   |                  |
-       | API Requests           |                    |                   |                  |
-       |----------------------->|                    |                   |                  |
-       |                        |                    |                   |                  |
-       |                      Process                |                   |                  |
-       |                        |                    |                   |                  |
-       |                   Data Retrieval             |                   |                  |
-       |                        |                    |                   |                  |
-       |                        |    Database Query   |                   |                  |
-       |                        |<-------------------|                   |                  |
-       |                        |                    |                   |                  |
-       |                        |    Data Response    |                   |                  |
-       |                        |------------------->|                   |                  |
-       |                        |                    |                   |                  |
-       | API Responses          |                    |                   |                  |
-       |<-----------------------|                    |                   |                  |
-       |                        |                    |                   |                  |
-       |                        |                    |    Data Storage   |                  |
-       |                        |                    |------------------>|                  |
-       |                        |                    |                   |                  |
-       |                        |                    |                   |     Caching      |
-       |                        |                    |                   |<-----------------|
-       |                        |                    |                   |                  |
-       |                        |                    |                   |   Data Retrieval |
-       |                        |                    |                   |----------------->|
-       |                        |                    |                   |                  |
-       |    Front-end Updates   |                    |                   |                  |
-       |----------------------->|                    |                   |                  |
-       |                        |                    |                   |                  |
-       |      Rendered Views    |                    |                   |                  |
-       |<-----------------------|                    |                   |                  |
-       |                        |                    |                   |                  |
-       |                        |                    |                   |                  |
-       |    Displayed Views     |                    |                   |                  |
-       |                        |                    |                   |                  |
-+------------------+
-|   User's        |
-|   Browser       |
-+------------------+
+                                    +------------------+
+                                    |   User's        |
+                                    |   Browser       |
+                                    +------------------+
+                                             |
+                                     HTTP Requests
+                                             |
+                                             v
+                                    +------------------+
+                                    |   Front-end      |
+                                    |   Container      |
+                                    +------------------+
+                                             |
+                                             | Views
+                                             |
+                                             v
+                                    +------------------+
+                                    |   Back-end       |
+                                    |   Container      |
+                                    +------------------+
+                                             |
+                                     API Requests
+                                             |
+                                             v
+                                    +------------------+
+                                    |   Database       |
+                                    |   Container      |
+                                    +------------------+
+                                             |
+                                    Database Queries
+                                             |
+                                             v
+                                    +------------------+
+                                    |   Redis          |
+                                    |   Container      |
+                                    +------------------+
+                                             |
+                                    Caching Data
+                                             |
+                                             v
+                                    +------------------+
+                                    |   Front-end      |
+                                    |   Container      |
+                                    +------------------+
+                                             |
+                                 Front-end Updates
+                                             |
+                                             v
+                                    +------------------+
+                                    |   Front-end      |
+                                    |   Container      |
+                                    +------------------+
+                                             |
+                                        Rendered Views
+                                             |
+                                             v
+                                    +------------------+
+                                    |   User's        |
+                                    |   Browser       |
+                                    +------------------+
+
+
 
 ### I'm still fixing this topology 😋
 
