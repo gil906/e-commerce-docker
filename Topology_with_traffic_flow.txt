@@ -15,12 +15,12 @@
        |                        |                    |                   |                  |
        |                      Process                |                   |                  |
        |                        |                    |                   |                  |
-       |                   Data Retrieval             |                   |                  |
+       |                   Data Retrieval            |                   |                  |
        |                        |                    |                   |                  |
-       |                        |    Database Query   |                   |                  |
+       |                        |    Database Query  |                   |                  |
        |                        |<-------------------|                   |                  |
        |                        |                    |                   |                  |
-       |                        |    Data Response    |                   |                  |
+       |                        |    Data Response   |                   |                  |
        |                        |------------------->|                   |                  |
        |                        |                    |                   |                  |
        | API Responses          |                    |                   |                  |
