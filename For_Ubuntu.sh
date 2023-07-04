@@ -57,7 +57,7 @@ EOF
 docker build -t redis -f Dockerfile.redis .
 docker run -d --name redis-container -p 6379:6379 redis
 
-# Build and run Front-end container
+# Build and run Front-end container - It will map the frontend 3000 to the container port 80
 cd ..
 docker build -t frontend -f ecommerce/Dockerfile.frontend .
 docker run -d --name frontend-container -p 3000:80 frontend
